@@ -1,0 +1,11 @@
+Model Information:
+* title:	Iron Man Model V2 Blender 2.90 Eevee and Cycles
+* source:	https://sketchfab.com/3d-models/iron-man-model-v2-blender-290-eevee-and-cycles-57065a583b104603bbfb2aad08c5313f
+* author:	Darth_Ir0n (https://sketchfab.com/DarthIron)
+
+Model License:
+* license type:	CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)
+* requirements:	Author must be credited. No commercial use.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Iron Man Model V2 Blender 2.90 Eevee and Cycles" (https://sketchfab.com/3d-models/iron-man-model-v2-blender-290-eevee-and-cycles-57065a583b104603bbfb2aad08c5313f) by Darth_Ir0n (https://sketchfab.com/DarthIron) licensed under CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)

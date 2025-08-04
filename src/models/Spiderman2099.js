@@ -69,7 +69,7 @@ function Spiderman2099() {
           <directionalLight position={[-10, -10, -10]} intensity={10} />
           <pointLight
             color="purple"
-            intensity={1.5}
+            intensity={1.6}
             position={[0, -20, 30]}
             distance={100}
             decay={2}

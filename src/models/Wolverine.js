@@ -4,7 +4,7 @@ import {
   OrbitControls,
   useGLTF,
   useAnimations,
-  Center,
+  // Center,
   Html,
 } from "@react-three/drei";
 
@@ -26,7 +26,14 @@ function Model({ url }) {
     }
   }, [actions]);
 
-  return <primitive ref={group} object={scene} scale={[4.0, 4.0, 4.0]} />;
+  return (
+    <primitive
+      ref={group}
+      object={scene}
+      scale={[4.3, 4.3, 4.3]}
+      position={[0, -6, 0]}
+    />
+  );
 }
 
 function Wolverine() {
@@ -53,6 +60,7 @@ function Wolverine() {
           height: "100%",
           overflow: "visible",
           borderRadius: "20px",
+          // backgroundColor: "white",
         }}
         className="d-block mx-lg-auto img-fluid d-flex align-items-center"
         alt="Bootstrap Themes"
@@ -70,9 +78,9 @@ function Wolverine() {
         />
 
         <Suspense fallback={<Html center>Loading…</Html>}>
-          <Center position={[0, 16, 0]}>
-            <Model url="/3Dmodels/3Dwolverine/scene.gltf" />
-          </Center>
+          {/* <Center position={[0, 16, 0]}> */}
+          <Model url="/3Dmodels/3Dwolverine/scene.gltf" />
+          {/* </Center> */}
         </Suspense>
 
         <OrbitControls

@@ -4,7 +4,7 @@ import {
   OrbitControls,
   useGLTF,
   useAnimations,
-  Center,
+  // Center,
   Html,
 } from "@react-three/drei";
 
@@ -24,7 +24,14 @@ function Model({ url }) {
     }
   }, [actions]);
 
-  return <primitive ref={group} object={scene} scale={[4.0, 4.0, 4.0]} />;
+  return (
+    <primitive
+      ref={group}
+      object={scene}
+      scale={[4.0, 4.0, 4.0]}
+      position={[0, -4.5, 0]}
+    />
+  );
 }
 
 function Hulk() {
@@ -51,7 +58,7 @@ function Hulk() {
           height: "100%",
           overflow: "visible",
           borderRadius: "20px",
-          //   backgroundColor: "white",
+          // backgroundColor: "white",
         }}
         className="d-block mx-lg-auto img-fluid d-flex align-items-center"
         alt="Bootstrap Themes"
@@ -69,9 +76,9 @@ function Hulk() {
         />
 
         <Suspense fallback={<Html center>Loading…</Html>}>
-          <Center position={[0, 9.8, 0]}>
-            <Model url="/3Dmodels/3Dhulk/scene.gltf" />
-          </Center>
+          {/* <Center position={[0, 9.8, 0]}> */}
+          <Model url="/3Dmodels/3Dhulk/scene.gltf" />
+          {/* </Center> */}
         </Suspense>
 
         <OrbitControls

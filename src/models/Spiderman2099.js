@@ -25,7 +25,7 @@ function Model({ url }) {
     <primitive
       ref={group}
       object={scene}
-      scale={[8.5, 8.5, 8.5]}
+      scale={[9, 9, 9]}
       position={[0, -8, 0]}
     />
   );
@@ -59,6 +59,7 @@ function Spiderman2099() {
             height: "100%",
             overflow: "visible",
             borderRadius: "20px",
+            // backgroundColor: "white",
           }}
           className="d-block mx-lg-auto img-fluid d-flex align-items-center"
           alt="Bootstrap Themes"

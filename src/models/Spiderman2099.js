@@ -76,7 +76,7 @@ function Spiderman2099() {
           />
 
           <Suspense fallback={<Html center>Loading…</Html>}>
-            <Model url="/3Dmodels/3dspiderman2099/scene.gltf" />
+            <Model url="/3Dmodels/3Dspiderman2099/scene.gltf" />
           </Suspense>
 
           <OrbitControls

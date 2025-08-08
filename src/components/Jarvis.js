@@ -43,7 +43,7 @@ function Jarvis() {
     setLoading(true);
 
     try {
-      const res = await fetch("http://localhost:3001/api/jarvis", {
+      const res = await fetch("https://ayushsri.onrender.com/api/jarvis", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ messages: next, hero }),
@@ -57,7 +57,7 @@ function Jarvis() {
         {
           role: "assistant",
           content:
-            "My comms link glitched. If this persists, check the server URL and API key.",
+            "My comms link glitched. If this persists, please email Ayush.",
         },
       ]);
     } finally {

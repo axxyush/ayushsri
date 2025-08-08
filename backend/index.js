@@ -10,6 +10,19 @@ app.use(cors());
 app.use(express.json());
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+const allowedOrigins = ["https://ayushsri.vercel.app"];
+app.use(
+  cors({
+    origin: function (origin, cb) {
+      if (!origin || allowedOrigins.includes(origin)) return cb(null, true);
+      return cb(new Error("Not allowed by CORS"));
+    },
+    methods: ["GET", "POST", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
+
+app.options("*", cors());
 
 const heroOpeners = {
   Ironman: "Boot sequence online. Arc-reactor confidence at 100%.",

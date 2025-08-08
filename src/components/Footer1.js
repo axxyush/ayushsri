@@ -108,18 +108,24 @@ function Footer1() {
             <p className=" col-lg-10 text-white fs-5">
               <b>Follow The Guardian </b>
             </p>
-            <i
-              style={{ color: "#fffafaff", marginRight: "20px" }}
-              className="fa-brands fa-github fa-lg"
-            />
-            <i
-              style={{ color: "#fffafaff", marginRight: "20px" }}
-              className="fa-brands fa-linkedin fa-lg"
-            />
-            <i
-              style={{ color: "#fffafaff", marginRight: "20px" }}
-              className="fa-brands fa-instagram fa-lg"
-            />
+            <a href="https://github.com/axxyush">
+              <i
+                style={{ color: "#fffafaff", marginRight: "20px" }}
+                className="fa-brands fa-github fa-lg"
+              />
+            </a>
+            <a href="https://www.linkedin.com/in/ayush-sri/">
+              <i
+                style={{ color: "#fffafaff", marginRight: "20px" }}
+                className="fa-brands fa-linkedin fa-lg"
+              />
+            </a>
+            <a href="https://www.instagram.com/axxyush/">
+              <i
+                style={{ color: "#fffafaff", marginRight: "20px" }}
+                className="fa-brands fa-instagram fa-lg"
+              />
+            </a>
           </div>
           <div className="col-md-10 mx-auto col-lg-5">
             <Contact />

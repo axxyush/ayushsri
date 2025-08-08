@@ -13,6 +13,7 @@ import Projects from "./components/Projects";
 import CharacterSelector from "./components/CharacterSelector";
 // import JarvisChat from "./components/JarvisChat";
 import { Toaster } from "react-hot-toast";
+import Jarvis from "./components/Jarvis";
 
 function App() {
   const [hero, setHero] = useState(null);
@@ -38,6 +39,7 @@ function App() {
       <Experience />
       <Projects />
       <Arsenal />
+      <Jarvis />
       <Footer1 />
       <Footer2 />
       <Toaster />

@@ -45,6 +45,7 @@ export default function TerminalOverlay({
         projects: "Go to Projects section",
         skills: "Go to Skills section",
         contact: "Go to Contact section",
+        jarvis: "Ask anything to Jarvis",
         resume: "Download my resume",
         exit: "Close the terminal",
         clear: "Clear the screen",
@@ -140,6 +141,17 @@ export default function TerminalOverlay({
               }, 1000);
               break;
 
+            case "jarvis":
+              typeText(`Navigating to '${cmd}'...\r\n`, () => {
+                onNavigate(cmd);
+                onClose();
+              });
+              setTimeout(() => {
+                onNavigate(cmd);
+                onClose();
+              }, 1000);
+              break;
+
             case "contact":
               typeText(`Navigating to '${cmd}'...\r\n`, () => {
                 onNavigate(cmd);
@@ -150,6 +162,7 @@ export default function TerminalOverlay({
                 onClose();
               }, 1000);
               break;
+
             case "resume":
               typeText("Preparing resume download...\r\n", () => {
                 onDownloadResume();

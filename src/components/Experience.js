@@ -90,7 +90,7 @@ function Experience() {
       location: "Buffalo, NY",
       bulletPoints: [
         "Built 5+ hardware-software projects using Arduino, SolidWorks & 3D printing, meeting all design specifications.",
-        "Mentored 40+ peers through coding fundamentals workshops/events, helping them develop mini-projects",
+        "Mentored 40+ peers through coding fundamentals workshops/events, helping them develop mini-projects.",
         "Completed 4-modules creating ESP32 robot project, earning SEAS Maker Badge for final presentation.",
       ],
     },

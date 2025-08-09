@@ -305,20 +305,18 @@ body {
   border-color: #4b5563;
 }
 
-@media (prefers-color-scheme: dark) {
-  .chat-box {
-    background-color: #1f2937;
-  }
-  .card-title {
-    color: #ffffff;
-  }
-  .form-control {
-    background-color: #374151;
-    color: #ffffff;
-    border-color: #4b5563;
-  }
-  .border-bottom,
-  .border-top {
-    border-color: #4b5563 !important;
-  }
+.chat-box {
+  background-color: #1f2937;
+}
+.card-title {
+  color: #ffffff;
+}
+.form-control {
+  background-color: #374151;
+  color: #ffffff;
+  border-color: #4b5563;
+}
+.border-bottom,
+.border-top {
+  border-color: #4b5563 !important;
 }

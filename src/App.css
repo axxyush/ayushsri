@@ -320,3 +320,227 @@ body {
 .border-top {
   border-color: #4b5563 !important;
 }
+
+/* Hero model interactivity */
+.hero-model-stage {
+  isolation: isolate;
+}
+.hero-model-hint {
+  position: absolute;
+  bottom: 0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.7);
+  background: rgba(0, 0, 0, 0.35);
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  pointer-events: none;
+  z-index: 2;
+  white-space: nowrap;
+}
+
+.experience-toggle:focus-visible {
+  outline: 2px solid var(--card-hover-border-color, #dc3545);
+  outline-offset: 4px;
+  border-radius: 0.35rem;
+}
+
+/* Floating Jarvis */
+.jarvis-float {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 1070;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.75rem;
+}
+.jarvis-fab {
+  width: 3.4rem;
+  height: 3.4rem;
+  border-radius: 999px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+.jarvis-panel {
+  width: min(380px, calc(100vw - 2rem));
+  height: min(520px, 70vh);
+  background: #1f2937;
+  border-radius: 1rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.4);
+  border: 1px solid #374151;
+}
+.jarvis-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid #374151;
+}
+.jarvis-panel-messages {
+  flex: 1;
+  overflow: auto;
+  padding: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+.jarvis-bubble {
+  max-width: 85%;
+  padding: 0.55rem 0.75rem;
+  border-radius: 0.65rem;
+  color: #fff;
+  white-space: pre-wrap;
+  font-size: 0.9rem;
+}
+.jarvis-bubble.is-user {
+  align-self: flex-end;
+  background: #3b82f6;
+}
+.jarvis-bubble.is-bot {
+  align-self: flex-start;
+  background: #4b5563;
+}
+.jarvis-panel-input {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  border-top: 1px solid #374151;
+}
+.jarvis-panel-input .form-control {
+  background: #374151;
+  color: #fff;
+  border-color: #4b5563;
+}
+
+/* Cursor trail */
+.cursor-trail-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1060;
+}
+
+/* Suit-up boot screen */
+.suitup-screen {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #050505;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+  padding: 2rem;
+  text-align: center;
+}
+.suitup-glow {
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.25;
+  z-index: 0;
+}
+.suitup-portrait {
+  width: min(220px, 50vw);
+  height: auto;
+  object-fit: contain;
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.55));
+}
+.suitup-title {
+  position: relative;
+  z-index: 1;
+  margin-top: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.suitup-status {
+  position: relative;
+  z-index: 1;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0.35rem 0 1.25rem;
+}
+.suitup-bar {
+  position: relative;
+  z-index: 1;
+  width: min(320px, 80vw);
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+}
+.suitup-bar-fill {
+  height: 100%;
+  border-radius: inherit;
+  transition: width 0.15s ease;
+}
+.suitup-pct {
+  position: relative;
+  z-index: 1;
+  margin-top: 0.6rem;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.55);
+  font-variant-numeric: tabular-nums;
+}
+
+/* In-canvas model loader */
+.model-loader {
+  width: 160px;
+  text-align: center;
+  color: #fff;
+  font-family: system-ui, sans-serif;
+}
+.model-loader-ring {
+  width: 42px;
+  height: 42px;
+  margin: 0 auto 0.65rem;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.2);
+  border-top-color: var(--loader-accent, #ef4444);
+  animation: model-spin 0.8s linear infinite;
+}
+.model-loader-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  opacity: 0.85;
+  margin-bottom: 0.45rem;
+}
+.model-loader-bar {
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.15);
+  overflow: hidden;
+}
+.model-loader-fill {
+  height: 100%;
+  background: var(--loader-accent, #ef4444);
+  transition: width 0.15s ease;
+}
+.model-loader-pct {
+  margin-top: 0.35rem;
+  font-size: 0.7rem;
+  opacity: 0.7;
+  font-variant-numeric: tabular-nums;
+}
+@keyframes model-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

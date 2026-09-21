@@ -2,22 +2,55 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import pehcharm from "../images/pehcharm.png";
 import walle from "../images/walle.png";
+import armie from "../images/armie.png";
 import meetwise from "../images/meetwise.png";
 
 const projectsData = [
   {
+    title: "Dots",
+    description:
+      "A tool that converts floorplans into tactile braille maps with QR-linked voice and text Q&A for blind and low-vision users, powered by Gemini, Fetch.ai ASI:One, and ElevenLabs.",
+    techStack: ["Python", "Gemini", "Fetch.ai ASI:One", "ElevenLabs", "SQLite"],
+    imageUrl:
+      "https://d112y698adiu2z.cloudfront.net/photos/production/software_thumbnail_photos/004/611/378/datas/medium.jpeg",
+    liveUrl: "https://devpost.com/software/dots-y5r21j",
+    githubUrl: "https://github.com/axxyush/dots",
+  },
+  {
+    title: "Armie",
+    description:
+      "A mixed-reality robotic surgical arm built in 48 hours for surgery training, reducing reliance on $500–$3K cadaver specimens with Arduino Uno Q firmware, BLE teleoperation, and Snap Spectacles AR calibration.",
+    techStack: [
+      "Arduino Uno Q",
+      "BLE",
+      "Embedded C++",
+      "Servo Motors",
+      "3D Printing",
+      "Snap Spectacles",
+    ],
+    imageUrl: armie,
+    liveUrl: "https://devpost.com/software/armie",
+    githubUrl: "https://github.com/axxyush/ARmie-mithack",
+  },
+  {
     title: "MeetWise",
     description:
-      "An AI meeting assistant that auto-transcribes audio, labels speakers, and lets you query key moments on the fly.",
-    techStack: ["React.js", "FastAPI", "MongoDB", "HuggingFace", "RunPod"],
+      "A meeting intelligence platform that eliminates manual notetaking by enabling AI conversational search over past meetings, with Whisper & Pyannote transcription, speaker diarization, and an OpenAI-powered query interface.",
+    techStack: [
+      "PyTorch",
+      "React",
+      "MongoDB",
+      "RunPod",
+      "FastAPI",
+      "OpenAI API",
+    ],
     imageUrl: meetwise,
-    // liveUrl: "",
     githubUrl: "https://github.com/axxyush/meetwise",
   },
   {
     title: "Pehcharm",
     description:
-      "A MERN-stack platform where users build/share professional portfolios augmented with AI-driven feedback.",
+      "A full-stack platform enabling 100+ users to create portfolios (4.5/5 from 20+ testers), with AI feedback, recommendations, profile-view analytics, and GitHub & Jobs API integrations.",
     techStack: [
       "React.js",
       "Node.js",
@@ -70,9 +103,8 @@ const ProjectCard = ({ project, index, variant }) => {
         <img
           src={project.imageUrl}
           alt={project.title}
-          width={600}
-          height={400}
-          className="card-img-top w-100 h-100 object-cover transition-all duration-300 ease-in-out project-image"
+          style={{ objectFit: "cover", height: "200px", width: "100%" }}
+          className="card-img-top object-cover transition-all duration-300 ease-in-out project-image"
         />
       </div>
       <div className="card-body d-flex flex-column p-4">
@@ -95,6 +127,8 @@ const ProjectCard = ({ project, index, variant }) => {
             <a
               href={project.liveUrl}
               className={`btn btn-${variant} text-center flex-fill`}
+              target="_blank"
+              rel="noopener noreferrer"
             >
               <i className="fa-solid fa-globe" style={{ color: "#ffffffff" }} />{" "}
               Live Demo
@@ -103,6 +137,8 @@ const ProjectCard = ({ project, index, variant }) => {
           <a
             href={project.githubUrl}
             className="btn btn-outline-dark text-center flex-fill"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             <i className="fa-brands fa-github" /> GitHub
           </a>

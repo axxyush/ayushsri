@@ -6,23 +6,20 @@ const OpenAI = require("openai");
 const { jarvisContext } = require("./jarvisContext");
 
 const app = express();
-app.use(cors());
-app.use(express.json());
+// app.use(cors());
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-const allowedOrigins = ["https://ayushsri.vercel.app"];
+const allowedOrigins = ["http://localhost:3000", "https://ayushsri.vercel.app"];
 app.use(
   cors({
-    origin: function (origin, cb) {
-      if (!origin || allowedOrigins.includes(origin)) return cb(null, true);
-      return cb(new Error("Not allowed by CORS"));
-    },
+    origin: allowedOrigins,
     methods: ["GET", "POST", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
 app.options("*", cors());
+app.use(express.json());
 
 const heroOpeners = {
   Ironman: "Boot sequence online. Arc-reactor confidence at 100%.",

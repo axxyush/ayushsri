@@ -1,8 +1,7 @@
+import React, { useState, useEffect, useCallback } from "react";
 import "./App.css";
-import React, { useState, useEffect } from "react";
 import About from "./components/About";
 import Arsenal from "./components/Arsenal";
-// import Contact from "./components/Contact";
 import Education from "./components/Education";
 import Experience from "./components/Experience";
 import Footer1 from "./components/Footer1";
@@ -11,27 +10,42 @@ import Hero from "./components/Hero";
 import Navbar from "./components/Navbar";
 import Projects from "./components/Projects";
 import CharacterSelector from "./components/CharacterSelector";
-// import JarvisChat from "./components/JarvisChat";
+import SuitUpScreen from "./components/SuitUpScreen";
+import CursorTrail from "./components/CursorTrail";
 import { Toaster } from "react-hot-toast";
 import Jarvis from "./components/Jarvis";
 
 function App() {
   const [hero, setHero] = useState(null);
+  const [bootingHero, setBootingHero] = useState(null);
+
   useEffect(() => {
-    // read saved hero on first render
     const saved = localStorage.getItem("selectedHero");
     if (saved) setHero(saved);
   }, []);
 
   const handleSelectHero = (heroName) => {
-    localStorage.setItem("selectedHero", heroName);
-    setHero(heroName);
+    setBootingHero(heroName);
   };
+
+  const finishBoot = useCallback(() => {
+    if (!bootingHero) return;
+    localStorage.setItem("selectedHero", bootingHero);
+    setHero(bootingHero);
+    setBootingHero(null);
+  }, [bootingHero]);
+
+  if (bootingHero) {
+    return <SuitUpScreen heroId={bootingHero} onComplete={finishBoot} />;
+  }
+
   if (!hero) {
     return <CharacterSelector onSelect={handleSelectHero} />;
   }
+
   return (
     <>
+      <CursorTrail hero={hero} />
       <Navbar />
       <Hero />
       <About />

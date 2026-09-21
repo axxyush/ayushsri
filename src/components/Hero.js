@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
-import Ironman from "../models/Ironman";
-import Wolverine from "../models/Wolverine";
-import Spiderman2099 from "../models/Spiderman2099";
+import React, { useState, useEffect, Suspense, lazy } from "react";
 import TerminalOverlay from "./TerminalOverlay";
-import Hulk from "../models/Hulk";
+
+const Ironman = lazy(() => import("../models/Ironman"));
+const Wolverine = lazy(() => import("../models/Wolverine"));
+const Spiderman2099 = lazy(() => import("../models/Spiderman2099"));
+const Hulk = lazy(() => import("../models/Hulk"));
 
 export default function Hero() {
   const [termOpen, setTermOpen] = useState(false);
@@ -15,10 +16,10 @@ export default function Hero() {
   }, []);
 
   const modelMap = {
-    Ironman: Ironman,
-    Wolverine: Wolverine,
-    Spiderman2099: Spiderman2099,
-    Hulk: Hulk,
+    Ironman,
+    Wolverine,
+    Spiderman2099,
+    Hulk,
   };
   const variantMap = {
     Ironman: "danger",
@@ -38,7 +39,6 @@ export default function Hero() {
 
   return (
     <>
-      {/* Terminal */}
       <TerminalOverlay
         isOpen={termOpen}
         onClose={() => setTermOpen(false)}
@@ -47,16 +47,24 @@ export default function Hero() {
         onDownloadResume={handleDownloadResume}
       />
 
-      {/* Hero Section */}
       <div
         style={{ height: "90vh", marginTop: "3%" }}
         className="container col-xxl-8 px-4 py-5"
       >
         <div className="row flex-lg-row-reverse align-items-center justify-content-center g-5 py-5">
-          {/* 3D Model */}
-          <ChosenModel />
+          <Suspense
+            fallback={
+              <div
+                className="col-10 col-sm-8 col-lg-6 d-flex align-items-center justify-content-center text-light"
+                style={{ height: "40vh" }}
+              >
+                Assembling suit…
+              </div>
+            }
+          >
+            <ChosenModel />
+          </Suspense>
 
-          {/* Text + Buttons */}
           <div className="col-lg-6">
             <h1 className={`display-5 fw-bold lh-1 mb-3 text-${variant}`}>
               Ayush Srivastava

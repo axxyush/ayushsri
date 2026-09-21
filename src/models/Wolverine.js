@@ -1,12 +1,8 @@
 import React, { Suspense, useRef, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
-import {
-  OrbitControls,
-  useGLTF,
-  useAnimations,
-  // Center,
-  Html,
-} from "@react-three/drei";
+import { useGLTF, useAnimations } from "@react-three/drei";
+import { FollowLight, ReactiveGroup, SoftOrbit } from "./HeroReactivity";
+import ModelLoader from "./ModelLoader";
 
 function Model({ url }) {
   const group = useRef();
@@ -14,15 +10,9 @@ function Model({ url }) {
   const { actions } = useAnimations(animations, group);
 
   useEffect(() => {
-    if (actions) {
-      if (actions["Emote_10493002050"]) {
-        actions["Emote_10493002050"].play();
-        actions["Emote_10493002050"].setLoop(true);
-      } else {
-        console.warn(
-          "Animation 'Emote_10493002050' not found in the GLTF file."
-        );
-      }
+    if (actions?.["Emote_10493002050"]) {
+      actions["Emote_10493002050"].play();
+      actions["Emote_10493002050"].setLoop(true);
     }
   }, [actions]);
 
@@ -39,7 +29,7 @@ function Model({ url }) {
 function Wolverine() {
   return (
     <div
-      className="col-10 col-sm-8 col-lg-6"
+      className="col-10 col-sm-8 col-lg-6 hero-model-stage"
       style={{
         height: "40vh",
         position: "relative",
@@ -49,7 +39,12 @@ function Wolverine() {
       }}
     >
       <Canvas
-        gl={{ alpha: true }}
+        gl={{
+          alpha: true,
+          antialias: true,
+          powerPreference: "high-performance",
+        }}
+        dpr={[1, 1.5]}
         camera={{ position: [0, 5, 30], fov: 25 }}
         style={{
           background: "transparent",
@@ -60,10 +55,8 @@ function Wolverine() {
           height: "100%",
           overflow: "visible",
           borderRadius: "20px",
-          // backgroundColor: "white",
         }}
         className="d-block mx-lg-auto img-fluid d-flex align-items-center"
-        alt="Bootstrap Themes"
       >
         <ambientLight intensity={0.1} />
         <hemisphereLight skyColor="#a7bc21ff" intensity={5} />
@@ -76,20 +69,15 @@ function Wolverine() {
           distance={100}
           decay={2}
         />
+        <FollowLight color="#ffdd44" intensity={3} />
 
-        <Suspense fallback={<Html center>Loading…</Html>}>
-          {/* <Center position={[0, 16, 0]}> */}
-          <Model url="/3Dmodels/3Dwolverine/scene.gltf" />
-          {/* </Center> */}
+        <Suspense fallback={<ModelLoader color="#eab308" />}>
+          <ReactiveGroup>
+            <Model url="/3Dmodels/3Dwolverine/scene.gltf" />
+          </ReactiveGroup>
         </Suspense>
 
-        <OrbitControls
-          enablePan={true}
-          enableZoom={true}
-          enableRotate={true}
-          autoRotate
-          autoRotateSpeed={1}
-        />
+        <SoftOrbit speed={1} />
       </Canvas>
     </div>
   );

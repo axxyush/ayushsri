@@ -1,12 +1,8 @@
 import React, { Suspense, useRef, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
-import {
-  OrbitControls,
-  useGLTF,
-  useAnimations,
-  // Center,
-  Html,
-} from "@react-three/drei";
+import { useGLTF, useAnimations } from "@react-three/drei";
+import { FollowLight, ReactiveGroup, SoftOrbit } from "./HeroReactivity";
+import ModelLoader from "./ModelLoader";
 
 function Model({ url }) {
   const group = useRef();
@@ -14,13 +10,9 @@ function Model({ url }) {
   const { actions } = useAnimations(animations, group);
 
   useEffect(() => {
-    if (actions) {
-      if (actions["Walk_Fwd_C"]) {
-        actions["Walk_Fwd_C"].play();
-        actions["Walk_Fwd_C"].setLoop(true);
-      } else {
-        console.warn("Animation 'Walk_Fwd_C' not found in the GLTF file.");
-      }
+    if (actions?.["Walk_Fwd_C"]) {
+      actions["Walk_Fwd_C"].play();
+      actions["Walk_Fwd_C"].setLoop(true);
     }
   }, [actions]);
 
@@ -37,7 +29,7 @@ function Model({ url }) {
 function Hulk() {
   return (
     <div
-      className="col-10 col-sm-8 col-lg-6"
+      className="col-10 col-sm-8 col-lg-6 hero-model-stage"
       style={{
         height: "40vh",
         position: "relative",
@@ -47,7 +39,12 @@ function Hulk() {
       }}
     >
       <Canvas
-        gl={{ alpha: true }}
+        gl={{
+          alpha: true,
+          antialias: true,
+          powerPreference: "high-performance",
+        }}
+        dpr={[1, 1.5]}
         camera={{ position: [10, 5, 14], fov: 35 }}
         style={{
           background: "transparent",
@@ -58,10 +55,8 @@ function Hulk() {
           height: "100%",
           overflow: "visible",
           borderRadius: "20px",
-          // backgroundColor: "white",
         }}
         className="d-block mx-lg-auto img-fluid d-flex align-items-center"
-        alt="Bootstrap Themes"
       >
         <ambientLight intensity={0.1} />
         <hemisphereLight skyColor="#a7bc21ff" intensity={2} />
@@ -74,20 +69,15 @@ function Hulk() {
           distance={100}
           decay={2}
         />
+        <FollowLight color="#66ff66" intensity={3} />
 
-        <Suspense fallback={<Html center>Loading…</Html>}>
-          {/* <Center position={[0, 9.8, 0]}> */}
-          <Model url="/3Dmodels/3Dhulk/scene.gltf" />
-          {/* </Center> */}
+        <Suspense fallback={<ModelLoader color="#22c55e" />}>
+          <ReactiveGroup>
+            <Model url="/3Dmodels/3Dhulk/scene.gltf" />
+          </ReactiveGroup>
         </Suspense>
 
-        <OrbitControls
-          enablePan={true}
-          enableZoom={true}
-          enableRotate={true}
-          autoRotate
-          autoRotateSpeed={4}
-        />
+        <SoftOrbit speed={2.5} />
       </Canvas>
     </div>
   );

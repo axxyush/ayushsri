@@ -1,9 +1,9 @@
-// src/components/Jarvis.jsx
 import React, { useState, useEffect, useRef } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 function Jarvis() {
   const [hero, setHero] = useState(null);
+  const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState([
     {
       role: "assistant",
@@ -13,6 +13,7 @@ function Jarvis() {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const chatRef = useRef(null);
+  const pendingSend = useRef(null);
 
   useEffect(() => {
     const saved = localStorage.getItem("selectedHero");
@@ -23,7 +24,7 @@ function Jarvis() {
     if (chatRef.current) {
       chatRef.current.scrollTop = chatRef.current.scrollHeight;
     }
-  }, [messages, loading]);
+  }, [messages, loading, open]);
 
   const variantMap = {
     Ironman: "danger",
@@ -33,8 +34,8 @@ function Jarvis() {
   };
   const variant = variantMap[hero] || "danger";
 
-  const send = async () => {
-    const text = input.trim();
+  const send = async (overrideText) => {
+    const text = (overrideText ?? input).trim();
     if (!text || loading) return;
 
     const next = [...messages, { role: "user", content: text }];
@@ -65,6 +66,31 @@ function Jarvis() {
     }
   };
 
+  useEffect(() => {
+    const handler = (e) => {
+      const prompt = e.detail?.prompt || "";
+      setOpen(true);
+      if (!prompt) return;
+      setInput(prompt);
+      if (e.detail?.autoSend) {
+        pendingSend.current = prompt;
+      }
+    };
+    window.addEventListener("open-jarvis", handler);
+    return () => window.removeEventListener("open-jarvis", handler);
+  }, []);
+
+  useEffect(() => {
+    if (!open || !pendingSend.current) return undefined;
+    const prompt = pendingSend.current;
+    pendingSend.current = null;
+    const t = setTimeout(() => {
+      send(prompt);
+    }, 200);
+    return () => clearTimeout(t);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open]);
+
   const onKeyDown = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
@@ -79,134 +105,101 @@ function Jarvis() {
         style={{ backgroundColor: "#e9ededff" }}
         className="py-5"
       >
-        <div className="container px-4">
+        <div className="container px-4 text-center">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, ease: "easeOut" }}
-            className="text-center display-4 fw-bold text-dark mb-5"
+            className="display-5 fw-bold text-dark mb-3"
           >
-            Ask Jarvis anything!
+            Ask Jarvis anything
           </motion.h2>
-
-          <div className="mb-5">
-            <div className="d-flex justify-content-center flex-wrap gap-3">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, ease: "easeOut" }}
-              >
-                {/* Chat bot start */}
-                <div
-                  className="d-flex justify-content-center"
-                  style={{ width: "90vw" }}
-                >
-                  <div className="chat-box p-3" style={{ width: "90%" }}>
-                    <div
-                      className="card-body d-flex flex-column"
-                      style={{ height: "70vh" }}
-                    >
-                      <div
-                        className="border-bottom pb-2 mb-2"
-                        style={{ borderColor: "#4b5563" }}
-                      >
-                        <div className="d-flex justify-content-between align-items-center">
-                          <h2
-                            className="card-title text-light"
-                            style={{ color: "#f9fcffff" }}
-                          >
-                            Jarvis
-                          </h2>
-                          <span className="badge bg-success text-white">
-                            Online
-                          </span>
-                        </div>
-                      </div>
-
-                      {/* Messages */}
-                      <div
-                        ref={chatRef}
-                        className="flex-grow-1 p-3 overflow-auto d-flex flex-column gap-2"
-                        id="chatDisplay"
-                      >
-                        {messages.map((m, i) => {
-                          const isUser = m.role === "user";
-                          return (
-                            <div
-                              key={i}
-                              className="chat-message text-white p-2 rounded"
-                              style={{
-                                backgroundColor: isUser ? "#3b82f6" : "#4b5563",
-                                maxWidth: "60%",
-                                alignSelf: isUser ? "flex-end" : "flex-start",
-                                whiteSpace: "pre-wrap",
-                              }}
-                            >
-                              {m.content}
-                            </div>
-                          );
-                        })}
-                        {loading && (
-                          <div
-                            className="text-secondary small"
-                            style={{ alignSelf: "flex-start" }}
-                          >
-                            JARVIS is thinking…
-                          </div>
-                        )}
-                      </div>
-
-                      {/* Input */}
-                      <div
-                        className="border-top pt-2 mt-2 mt-auto"
-                        style={{ borderColor: "#4b5563" }}
-                      >
-                        <div className="d-flex gap-2">
-                          <input
-                            placeholder="Type your message..."
-                            className="form-control p-2"
-                            style={{
-                              backgroundColor: "#374151",
-                              color: "#ffffff",
-                              borderColor: "#4b5563",
-                            }}
-                            id="chatInput"
-                            type="text"
-                            value={input}
-                            onChange={(e) => setInput(e.target.value)}
-                            onKeyDown={onKeyDown}
-                          />
-                          <button
-                            className={`btn btn-${variant}`}
-                            style={{
-                              padding: "0.375rem 0.75rem",
-                              transition: "all 0.3s ease-in-out",
-                            }}
-                            id="sendButton"
-                            onClick={send}
-                            disabled={loading}
-                          >
-                            {loading ? "Sending..." : "Send"}
-                          </button>
-                        </div>
-
-                        {/* Keep this line exactly, per your request */}
-                        <div className="mt-2 text-secondary small">
-                          Tip: Ask “Who is Ayush?” “Brag about Ayush.” “What
-                          project fits a fintech role?” etc.
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                {/* Chat bot end */}
-              </motion.div>
-            </div>
-          </div>
+          <p className="text-secondary mb-4">
+            Your always-on mission assistant — open the bubble anytime.
+          </p>
+          <button
+            type="button"
+            className={`btn btn-${variant} btn-lg px-4`}
+            onClick={() => setOpen(true)}
+          >
+            <i className="fa-solid fa-robot me-2" />
+            Open Jarvis
+          </button>
         </div>
       </section>
+
+      <div className="jarvis-float">
+        <AnimatePresence>
+          {open && (
+            <motion.div
+              className="jarvis-panel"
+              initial={{ opacity: 0, y: 24, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 16, scale: 0.95 }}
+              transition={{ duration: 0.22 }}
+            >
+              <div className="jarvis-panel-header">
+                <div>
+                  <div className="fw-semibold text-white">Jarvis</div>
+                  <span className="badge bg-success">Online</span>
+                </div>
+                <button
+                  type="button"
+                  className="btn-close btn-close-white"
+                  aria-label="Close Jarvis"
+                  onClick={() => setOpen(false)}
+                />
+              </div>
+
+              <div ref={chatRef} className="jarvis-panel-messages">
+                {messages.map((m, i) => {
+                  const isUser = m.role === "user";
+                  return (
+                    <div
+                      key={i}
+                      className={`jarvis-bubble ${isUser ? "is-user" : "is-bot"}`}
+                    >
+                      {m.content}
+                    </div>
+                  );
+                })}
+                {loading && (
+                  <div className="text-secondary small">JARVIS is thinking…</div>
+                )}
+              </div>
+
+              <div className="jarvis-panel-input">
+                <input
+                  placeholder="Ask about Ayush…"
+                  className="form-control"
+                  type="text"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  onKeyDown={onKeyDown}
+                />
+                <button
+                  className={`btn btn-${variant}`}
+                  onClick={() => send()}
+                  disabled={loading}
+                  type="button"
+                >
+                  {loading ? "…" : "Send"}
+                </button>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <button
+          type="button"
+          className={`jarvis-fab btn btn-${variant}`}
+          onClick={() => setOpen((o) => !o)}
+          aria-label={open ? "Close Jarvis" : "Open Jarvis"}
+        >
+          <i className={`fa-solid ${open ? "fa-xmark" : "fa-robot"}`} />
+        </button>
+      </div>
     </>
   );
 }

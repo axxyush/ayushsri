@@ -34,17 +34,18 @@ function About() {
                 <b>____________</b>
               </div>
               <p className="">
-                I’m Ayush Srivastava, a UB Computer Science major who wrangles
-                full-stack apps by day and racks up killstreaks in Call of Duty
-                by night, usually with a superhero movie queued up for halftime.
-                In my student-assistant position I’ve transformed clunky IT
-                workflows into smooth, user-friendly web app, and I love
-                swapping debugging war stories over coffee. Whether I’m
-                architecting an AI meeting sidekick or debating which Spiderman
-                suit looks best, I bring solid technical chops, a collaborative
-                spirit, and just enough dry wit to keep the team smiling. If you
-                need someone who can ship reliable code and still land the
-                winning headshot then let’s connect!
+                I love to code and I love plants. 4x hackathon winner across
+                Stanford, MIT, Carnegie Mellon, and UCLA. Right now I&apos;m
+                interning at Linde, where I&apos;m automating workflows and
+                digitizing old processes.
+              </p>
+              <p className="">
+                Outside of code, I grow bonsai. Currently working on a honey
+                locust cutting and a Schefflera arboricola and I whittle when I
+                want to work with my hands instead of a keyboard. I&apos;m also
+                into philosophy, and I&apos;m slowly working on a book. And when
+                I&apos;m not building or growing something, I&apos;m probably
+                watching a movie.
               </p>
             </div>
             <div className="col-10 col-sm-8 col-lg-6">

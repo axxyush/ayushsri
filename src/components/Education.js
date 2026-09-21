@@ -40,34 +40,36 @@ function Education() {
 
                 <div className="mt-2">
                   <p className="h5 fw-medium text-dark">
-                    Bachelor's in Computer Science
+                    B.S. in Computer Science
                   </p>
 
                   <p className="text-secondary fst-italic">
-                    Specialization: Software Development <br />
+                    Specialization: Software Engineering
                   </p>
 
                   <div className="d-flex align-items-center gap-2 text-dark">
                     <i className={`fa-award fa-solid text-${variant}`} />
-                    <span className="fw-medium">Cum GPA: 3.7/4.0</span>
+                    <span className="fw-medium">Cumulative GPA: 3.7/4.0</span>
                   </div>
+
+                  <div className="mt-2 text-secondary">
+                    <span>
+                      Dean&apos;s List: Spring 2024, Fall 2024, Fall 2025, Spring
+                      2026
+                    </span>
+                  </div>
+
                   <div className="mt-3">
-                    <p className="fw-small text-dark">Relevant Coursework:</p>
+                    <p className="fw-small text-dark">Awards:</p>
                     <ul className="list-unstyled d-flex flex-wrap gap-2">
                       <li className="badge bg-secondary text-white">
-                        Data Structures
+                        4x Hackathon Winner (Stanford, MIT, CMU, UCLA)
                       </li>
                       <li className="badge bg-secondary text-white">
-                        Algorithms
+                        Honors Scholar
                       </li>
                       <li className="badge bg-secondary text-white">
-                        System Design
-                      </li>
-                      <li className="badge bg-secondary text-white">
-                        Web Development
-                      </li>
-                      <li className="badge bg-secondary text-white">
-                        Computer Architecture
+                        UB Flagship Scholarship
                       </li>
                     </ul>
                   </div>
@@ -77,7 +79,7 @@ function Education() {
 
             <div className="d-flex align-items-center gap-2 text-secondary text-lg-end">
               <i className={`fa-solid fa-calendar-days text-${variant}`} />
-              <span className="fw-medium">Expected May 2027</span>
+              <span className="fw-medium">Expected Dec 2026</span>
             </div>
           </div>
         </div>
